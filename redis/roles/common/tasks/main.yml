@@ -1,0 +1,6 @@
+---
+- name: install ntpd
+  apt: name=ntp state=present
+
+- name: start ntpd service
+  service: name=ntp state=started enabled=yes
