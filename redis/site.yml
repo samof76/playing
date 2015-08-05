@@ -14,6 +14,7 @@
 
 - name: setup redis slave(s)
   hosts: redis-slaves
-  remote_user:
+  remote_user: root
+  roles:
   - base-redis
   - rslaves
