@@ -7,6 +7,8 @@
 
 - name: setup redis master
   hosts: redis-master
+  vars:
+    cluster: yes
   remote-user: root
   roles:
   - base-redis
@@ -18,3 +20,9 @@
   roles:
   - base-redis
   - rslaves
+
+- name: setup redis sentinels
+  hosts: redis-sentinels
+  remote_user: root
+  roles:
+  - rsentinels

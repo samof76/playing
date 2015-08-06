@@ -19,6 +19,10 @@ slave-serve-stale-data yes
 slave-read-only yes
 repl-disable-tcp-nodelay no
 slave-priority 100
+{% if cluster %}
+min-slaves-to-write 1
+min-slaves-max-lag 10
+{% endif %}
 appendonly {{ redis_master_appendonly }}
 appendfilename "redis-staging-ao.aof"
 appendfsync everysec
