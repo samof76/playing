@@ -26,4 +26,14 @@ Once you have done the edits, you are ready to go.
 
     $ ansible-playbook -i hosts site.yml
 
-This should setup the redis cluster with single redis-master and 3 redis-slaves. 
+This should setup the redis cluster with single redis-master and 3 redis-slaves. If you want add sentinels to the picture. You just need to modify the hosts file, and something like this.
+    
+    ...
+    ...
+    [redis-sentinels]
+    10.10.0.6
+    10.10.0.7
+    10.10.0.8
+    10.10.0.9
+
+Now you should rerun the, ansible-playbook -i hosts site.yml.
