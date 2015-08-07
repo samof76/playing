@@ -36,4 +36,4 @@ This should setup the redis cluster with single redis-master and 3 redis-slaves.
     10.10.0.8
     10.10.0.9
 
-Now you should rerun the, ansible-playbook -i hosts site.yml.
+Now you should rerun the, `ansible-playbook -i hosts site.yml`.
