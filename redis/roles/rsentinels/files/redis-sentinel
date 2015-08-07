@@ -13,7 +13,7 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/bin/redis-sentinel
-DAEMON_W_ARGS="/etc/redis/sentinel.conf"
+DAEMON_ARGS="/etc/redis/sentinel.conf"
 NAME=redis-sentinel
 DESC=redis-sentinel
 PIDFILE=/var/run/redis/redis-sentinel.pid

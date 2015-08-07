@@ -9,7 +9,7 @@
   hosts: redis-master
   vars:
     cluster: yes
-  remote-user: root
+  remote_user: root
   roles:
   - base-redis
   - rmaster
@@ -25,4 +25,5 @@
   hosts: redis-sentinels
   remote_user: root
   roles:
+  - base-redis
   - rsentinels
