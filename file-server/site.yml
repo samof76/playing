@@ -1,0 +1,14 @@
+---
+- name: applying common configurations
+  hosts: all
+  remote_user: root
+  roles:
+  - common
+
+- name: create users on servers
+  hosts: file-servers
+  remote_user: root
+  var:
+    env: ANYNAME
+  roles:
+    - sshusers

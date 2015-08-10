@@ -1,0 +1,6 @@
+---
+- name: create users
+  user: name={{ item }}  shell=/bin/bash  password=xxxxxxx
+  with_items:
+  - {{ env }}-user01
+  - {{ env }}-user02
