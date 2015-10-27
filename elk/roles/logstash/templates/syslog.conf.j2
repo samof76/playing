@@ -19,7 +19,6 @@ filter {
     }
     grok {
       match => {
-        "message" => "<%{POSINT:syslog_pri}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{DATA:syslog_program} ~%{DATA:merlin_application}_%{DATA:esp_domainname}-%{DATA:merlin_messagetype}:%{GREEDYDATA:merlin_longmessage}"
       }
       tag_on_failure => []
     }
@@ -31,8 +30,5 @@ filter {
 
 output {
   file {
-    message_format => "%{merlin_longmessage}"
-    flush_interval => 0
-    path => "/var/log/loggregator/%{merlin_application}/%{merlin_messagetype}-%{+YYYY-MM-dd}.log"
   }
 }
