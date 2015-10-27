@@ -1,0 +1,5 @@
+---
+logstash_input_tcp_port: 5001
+logstash_input_tcp_type: "syslog"
+logstash_input_udp_port: 5001
+logstash_input_udp_type: "syslog"

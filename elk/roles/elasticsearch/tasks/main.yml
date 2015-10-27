@@ -1,0 +1,16 @@
+---
+- name: Add Elasticsearch Key to the local Apt
+  apt_key: url=http://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+
+- name: Add Elasticsearch repo to the source list
+  apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main' state=present update_cache=yes
+
+- name: Install Elasticsearch
+  apt: name=elasticsearch=1.4.4 state=present
+
+- name: Copy the desired elastic search configuration
+  template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+  notify: restart elasticsearch
+
+- name: Start the elasticsearch service
+  service: name=elasticsearch state=started enabled=yes

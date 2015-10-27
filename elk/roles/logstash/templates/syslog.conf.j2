@@ -1,0 +1,38 @@
+input {
+  tcp {
+    port => {{ logstash_input_tcp_port }}
+    type => {{ logstash_input_tcp_type }}
+  }
+  udp {
+    port => {{ logstash_input_udp_port }}
+    type => {{ logstash_imput_udp_type }}
+  }
+}
+
+
+filter {
+  if [type] == "syslog" {
+    multiline {
+      pattern => "^[\[<]"
+      negate => true
+      what => "previous"
+    }
+    grok {
+      match => {
+        "message" => "<%{POSINT:syslog_pri}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{DATA:syslog_program} ~%{DATA:merlin_application}_%{DATA:esp_domainname}-%{DATA:merlin_messagetype}:%{GREEDYDATA:merlin_longmessage}"
+      }
+      tag_on_failure => []
+    }
+    if "_grokparsefailure" in [tags] {
+      drop { }
+    }
+  }
+}
+
+output {
+  file {
+    message_format => "%{merlin_longmessage}"
+    flush_interval => 0
+    path => "/var/log/loggregator/%{merlin_application}/%{merlin_messagetype}-%{+YYYY-MM-dd}.log"
+  }
+}
