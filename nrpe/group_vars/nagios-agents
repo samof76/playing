@@ -1,0 +1,4 @@
+---
+server_port: "<PORT of the AGENT>"
+server_address: "<LISTENING ADDRESS of the AGENT>"
+allowed_hosts: "<IP ADDRESS(ES) of the NAGIOS SERVERS>"
