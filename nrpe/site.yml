@@ -1,0 +1,8 @@
+---
+- name: setup nagios agent and nrpe plugins for monitoring
+  hosts: redis-servers
+  remote_user: redisadmin
+  become: yes
+  become_method: sudo
+  roles:
+  - nrpe

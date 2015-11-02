@@ -1,0 +1,16 @@
+---
+- name: install nagios agent and plugins
+  apt: name={{ item }} state=present
+  with_items:
+    - nagios-plugins
+    - nagios-nrpe-server
+
+- name: copy the check_mem script across
+  copy: src=check_mem.pl dest=/usr/lib/nagios/plugins/check_mem.pl owner=root group=root mode=755 backup=yes
+
+- name: copy the nrpe configuration
+  template: src=nrpe.cfg.j2 dest=/etc/nagios/nrpe.cfg
+  notify: restart nagios-nrpe-server
+
+- name: start the nagios nrpe service
+  service: name=nagios-nrpe-server state=started enabled=yes
