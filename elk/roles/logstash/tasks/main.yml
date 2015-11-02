@@ -8,9 +8,9 @@
 - name: Install Logstash service
   apt: name=logstash state=present
 
-- name Start the Logstash service
-  service: name=logstash state=stated enabled=yes
+- name: Start the Logstash service
+  service: name=logstash state=started enabled=yes
 
 - name: Copy the configuration
   template: src=syslog.conf.j2 dest=/etc/logstash/conf.d/syslog.conf
-  notiify: restart logstash service
+  notify: restart logstash service

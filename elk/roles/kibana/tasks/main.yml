@@ -1,26 +1,31 @@
 ---
 - name: Get the kibana package
   get_url: url=https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz dest=/tmp/kibana-4.0.1-linux-x64.tar.gz
-  environment:
-    http_proxy: http://myproxy.in:8080
-    https_proxy: http://myproxy.in:8080
 
 - name: Unarchive the package
-  unarchive: name=/tmp/kibana-4.0.1-linux-x64.tar.gz dest=/tmp copy=no
+  unarchive: src=/tmp/kibana-4.0.1-linux-x64.tar.gz dest=/opt copy=no
+
+- name: Stat the kibana source folder
+  stat: path=/opt/kibana-4.0.1-linux-x64
+  register: kibana_src_stat
 
 - name: Stat the kibana folder
-  stat: path=/tmp/kibana-4.0.1-linux-x64
+  stat: path=/opt/kibana
   register: kibana_stat
 
-- name: Move the kibana to its destined folder
-  command: mv /tmp/kibana-4.0.1-linux-x64 /opt/kibana
+- name: Remove kibana folder if exists
+  command: rm -rf /opt/kibana
   when: kibana_stat.stat.exists
+
+- name: Move the kibana to its destined folder
+  command: mv /opt/kibana-4.0.1-linux-x64 /opt/kibana
+  when: kibana_src_stat.stat.exists
 
 - name: Get the service script
   get_url: url=https://gist.githubusercontent.com/thisismitch/8b15ac909aed214ad04a/raw/bce61d85643c2dcdfbc2728c55a41dab444dca20/kibana4 dest=/etc/init.d
 
 - name: Change the file permissions
-  file: path=/etc/init.d/kibana4 mode="+x"
+  file: path=/etc/init.d/kibana4 mode="0755"
 
 - name: Copy the kibana configuration template
   template: src=kibana.yml.j2 dest=/opt/kibana/config/kibana.yml
@@ -28,4 +33,3 @@
 
 - name: Start the kibana service
   service: name=kibana4 state=started enabled=yes
-

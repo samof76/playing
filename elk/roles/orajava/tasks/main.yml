@@ -1,12 +1,12 @@
 ---
 - name: Update the repo list with Oracle Java
   apt_repository: repo='ppa:webupd8team/java' update_cache=yes
-  environment:
-    http_proxy: http://myproxy.in:8080
-    https_proxy: http://myproxy.in:8080
+
+- name: Autoaccept license for Java
+  action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+
+- name: Update APT package cache
+  action: apt update_cache=yes
 
 - name: Install the Oracle Java
   apt: name=oracle-java8-installer state=present
-  environment:
-    http_proxy: http://myproxy.in:8080
-    https_proxy: http://myproxy.in:8080

@@ -1,0 +1,8 @@
+[logstash-node]
+logstash_node ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_private_key_file=/Users/msvk/myvagrant/t1/private_key
+
+[elasticsearch-node]
+elasticsearch_node ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_private_key_file=/Users/msvk/myvagrant/t1/private_key
+
+[kibana-node]
+kibana_node ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_private_key_file=/Users/msvk/myvagrant/t1/private_key

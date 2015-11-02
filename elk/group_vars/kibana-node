@@ -1,0 +1,8 @@
+---
+kibana4_hostname: "localhost"
+kibana4_admin_username: "kibanaadmin"
+kibana4_admin_password: "p@55w0rd"
+kibana4_host: "localhost"
+kibana4_port: 5601
+elasticsearch_host: "localhost"
+elasticsearch_port: 9200

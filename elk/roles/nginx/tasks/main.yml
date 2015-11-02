@@ -2,14 +2,17 @@
 - name: Install apache2 utils
   apt: name=apache2-utils state=present
 
+- name: Install python-passlib
+  apt: name=python-passlib state=present
+
 - name: Install nginx server
   apt: name=nginx state=present
 
 - name: Add user to the password file
-  htpasswd: path=/etc/nginx/htpasswd.users name={{ kibana_admin }} password={{ kibana_admin_password }} owner=root group=www-data mode=0640
+  htpasswd: path=/etc/nginx/htpasswd.users name={{ kibana4_admin_username }} password={{ kibana4_admin_password }} owner=root group=www-data mode=0640
 
 - name: Add the nginx configuration
-  template: src=nginx.default.j2 destinamtion=/etc/nginx/sites-available/default
+  template: src=nginx.default.j2 dest=/etc/nginx/sites-available/default
   notify: restart nginx service
 
 - name: Start nginx service

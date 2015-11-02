@@ -1,23 +1,26 @@
 ---
 - name: apply common configuration to all the servers
   hosts: all
-  remote_user: ubuntu
-  sudo: yes
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
   roles:
   - common
 
 - name: setup elasticsearch server
   hosts: elasticsearch-node
-  remote_user: ubuntu
-  sudo: yes
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
   roles:
   - orajava
   - elasticsearch
 
 - name: setup logstash server
   hosts: logstash-node
-  remote_user: ubuntu
-  sudo: yes
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
   roles:
   - orajava
   - logstash
@@ -25,8 +28,9 @@
 
 - name: setup kibana ui
   hosts: kibana-node
-  remote_user: ubuntu
-  sudo: yes
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
   roles:
-  - apache2
   - kibana
+  - nginx
