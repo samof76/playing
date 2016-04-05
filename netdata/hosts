@@ -1,0 +1,4 @@
+[servers]
+server1 ansible_host=172.17.0.2 ansible_user=root
+server2 ansible_host=172.17.0.3 ansible_user=root
+server3 ansible_host=172.17.0.4 ansible_user=root
